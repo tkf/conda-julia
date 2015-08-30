@@ -17,7 +17,7 @@ requirements:
 
   run:
     - python
-    - julia <0.4.0.dev0
+    - julia <0.4.0a0
       # v0.4 is not supported: https://github.com/JuliaLang/pyjulia/issues/38
     - julia-pycall
 
