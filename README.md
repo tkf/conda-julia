@@ -1,6 +1,19 @@
 # Conda recipes for JuliaLang and its packages
 
 
+## Quick usage
+
+If you want to install Julia and [Python interface to julia][pyjulia]
+in a conda environment named `try-julia`, you can just run:
+
+```sh
+conda config --add channels tkf
+conda create --name try-julia python-julia
+```
+
+
+## Why conda?
+
 - Easily install official nightly build without destroying current
   Julia environment (or even without system install).
 - Trying cutting-edge Julia without long compilation.
