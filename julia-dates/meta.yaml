@@ -1,0 +1,34 @@
+package:
+  name: julia-dates
+  version: 0.3.2      # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+  version: 0.4.4      # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+
+source:
+  fn: julia-dates-0.3.2.zip # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+  fn: julia-dates-0.4.4.zip # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+  url: https://github.com/quinnj/Dates.jl/archive/333857d4166346beac830592dd0f407d6a44b6c6.zip # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+  url: https://github.com/quinnj/Dates.jl/archive/1764fc048a2186438be22dc7a3a34e87b333f296.zip # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+
+requirements:
+  run:
+    - julia >=0.3.0.dev0,<0.4.dev0 # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+    - julia >=0.4.0.dev0,<0.5.dev0 # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+
+build:
+  string: jl03_0      # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+  string: jl04_0      # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+  script_env:
+    - JULIA_VERSION
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+  requires:
+    - julia-compat    # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+
+about:
+  home: https://github.com/quinnj/Dates.jl
+  license_file: LICENSE.md

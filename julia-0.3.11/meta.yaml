@@ -1,0 +1,29 @@
+package:
+  name: julia
+  version: 0.3.11
+
+source:
+  fn: julia-0.3.11-linux-x86_64.tar.gz # [linux64]
+  fn: julia-0.3.11-linux-i686.tar.gz   # [linux32]
+  url: https://julialang.s3.amazonaws.com/bin/linux/x64/0.3/julia-0.3.11-linux-x86_64.tar.gz # [linux64]
+  url: https://julialang.s3.amazonaws.com/bin/linux/x86/0.3/julia-0.3.11-linux-i686.tar.gz   # [linux32]
+  md5: 2dbefd1636ca7d6ea9d6e438e3679dea # [linux64]
+  md5: 206a61234b4643f0f80ba54a029d3f8d # [linux32]
+  # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.3.11.md5
+
+build:
+  rpaths:
+    - lib/julia
+    - lib
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - which julia
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+
+about:
+  home: http://julialang.org
+  license_file: LICENSE.md

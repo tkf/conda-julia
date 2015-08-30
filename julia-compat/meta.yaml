@@ -1,0 +1,29 @@
+package:
+  name: julia-compat
+  version: 0.4.6
+
+source:
+  fn: julia-compat-0.4.6.zip
+  url: https://github.com/JuliaLang/Compat.jl/archive/v0.4.6.zip
+
+requirements:
+  run:
+    - julia >=0.3.0.dev0,<0.4.dev0 # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+    - julia >=0.4.0.dev0,<0.5.dev0 # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+
+build:
+  string: jl03_0      # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
+  string: jl04_0      # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+  script_env:
+    - JULIA_VERSION
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+
+about:
+  home: https://github.com/JuliaLang/Compat.jl
+  license_file: LICENSE.md

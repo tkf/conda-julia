@@ -1,0 +1,43 @@
+package:
+  name: python-julia
+  version: "0.1.1"
+
+source:
+  fn: python-julia-0.1.1.tar.gz
+  url: https://pypi.python.org/packages/source/j/julia/julia-0.1.1.tar.gz
+  md5: 75dfa30b3d4a8945182532d159d71fab
+
+build:
+  noarch_python: True
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - julia <0.4.0.dev0
+      # v0.4 is not supported: https://github.com/JuliaLang/pyjulia/issues/38
+    - julia-pycall
+
+test:
+  # Python imports
+  imports:
+    - julia
+
+  commands:
+    - wget https://github.com/JuliaLang/pyjulia/archive/master.zip
+    - unzip master
+    - mv pyjulia-master/test .
+    - rm -r pyjulia-master
+    - python -m unittest discover
+
+about:
+  home: https://github.com/JuliaLang/pyjulia
+  license: MIT License
+  summary: 'Julia/Python bridge with IPython support.'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml

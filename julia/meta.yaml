@@ -1,0 +1,25 @@
+package:
+  name: julia
+
+source:
+  fn: julia-linux64.tar.gz                                # [linux64]
+  fn: julia-linux32.tar.gz                                # [linux32]
+  url: https://status.julialang.org/download/linux-x86_64 # [linux64]
+  url: https://status.julialang.org/download/linux-i686   # [linux32]
+
+build:
+  rpaths:
+    - lib/julia
+    - lib
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - which julia
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+
+about:
+  home: http://julialang.org
+  license_file: LICENSE.md
