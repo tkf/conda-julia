@@ -12,9 +12,7 @@ source:
   # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.5.0.md5
 
 build:
-  rpaths:
-    - lib/julia
-    - lib
+  binary_relocation: False
 
 test:
   files:
