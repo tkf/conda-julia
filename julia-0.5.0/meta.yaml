@@ -1,15 +1,15 @@
 package:
   name: julia
-  version: 0.4.0
+  version: 0.5.0
 
 source:
-  fn: julia-0.4.0-linux-x86_64.tar.gz # [linux64]
-  fn: julia-0.4.0-linux-i686.tar.gz   # [linux32]
-  url: https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-linux-x86_64.tar.gz # [linux64]
-  url: https://julialang.s3.amazonaws.com/bin/linux/x86/0.4/julia-0.4.0-linux-i686.tar.gz   # [linux32]
-  md5: 53c80897b96bbc3f4d76148058c5d1b3 # [linux64]
-  md5: 711e3d8c71974e83670983f6ef250067 # [linux32]
-  # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.4.0.md5
+  fn: julia-0.5.0-linux-x86_64.tar.gz # [linux64]
+  fn: julia-0.5.0-linux-arm.tar.gz    # [linux32]
+  url: https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz # [linux64]
+  url: https://julialang.s3.amazonaws.com/bin/linux/arm/0.5/julia-0.5.0-linux-arm.tar.gz   # [linux32]
+  md5: 40563b7b116d76f052c3f0859608655d # [linux64]
+  md5: 4dfeaef0c9815be7d5a544e0ee9486f9 # [linux32]
+  # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.5.0.md5
 
 build:
   rpaths:
