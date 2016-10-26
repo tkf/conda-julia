@@ -1,0 +1,25 @@
+package:
+  name: julia
+  version: 0.5.0
+
+source:
+  fn: julia-0.5.0-full.tar.gz
+  url: https://github.com/JuliaLang/julia/releases/download/v0.5.0/julia-0.5.0-full.tar.gz
+  md5: b61385671ba74767ab452363c43131fb
+  # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.5.0.md5
+
+build:
+  string: mkl
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - which julia
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+
+about:
+  home: http://julialang.org
+  license_file: LICENSE.md
+  summary: Julia compiled with Intel Math Kernel Library (Intel MKL)
