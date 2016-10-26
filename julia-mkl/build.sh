@@ -18,7 +18,7 @@ else
     INTEL_ARCH=ia32
 fi
 
-source /opt/intel/mkl/bin/mklvars.sh $INTEL_ARCH
+source ${MKLROOT:-/opt/intel/mkl}/bin/mklvars.sh $INTEL_ARCH
 
 cp --verbose "$RECIPE_DIR/Make.user" .
 echo "prefix=$PREFIX" >> Make.user

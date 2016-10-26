@@ -10,6 +10,8 @@ source:
 
 build:
   string: mkl
+  script_env:
+    - MKLROOT
 
 test:
   files:
