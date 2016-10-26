@@ -24,3 +24,7 @@ cp --verbose "$RECIPE_DIR/Make.user" .
 echo "prefix=$PREFIX" >> Make.user
 make -j $MAKE_JOBS
 make install
+
+cp -t $PREFIX/lib/julia \
+   $MKLROOT/../compiler/lib/intel64/libiomp5.so \
+   $MKLROOT/lib/$INTEL_ARCH/lib*.so
