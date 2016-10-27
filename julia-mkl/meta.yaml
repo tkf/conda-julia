@@ -16,6 +16,8 @@ build:
   string: mkl
   script_env:
     - MKLROOT
+    - LD_LIBRARY_PATH # [linux]
+    - DYLD_LIBRARY_PATH # [osx]
 
 test:
   files:
