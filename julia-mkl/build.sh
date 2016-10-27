@@ -48,3 +48,8 @@ done
 cp -t $PREFIX/lib/julia \
    $MKLROOT/../compiler/lib/intel64/libiomp5.so \
    $MKLROOT/lib/$INTEL_ARCH/lib*.so
+
+
+# Wrap original bin/julia to set $JULIA_PKGDIR
+mv --verbose "$PREFIX/bin/julia" "$PREFIX/bin/julia_"
+cp --verbose "$RECIPE_DIR/julia-wrapper.sh" "$PREFIX/bin/julia"
