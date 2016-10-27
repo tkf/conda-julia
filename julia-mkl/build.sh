@@ -25,26 +25,8 @@ echo "prefix=$PREFIX" >> Make.user
 make -j $MAKE_JOBS
 make install
 
-for shlib in $PREFIX/lib/julia/*.so
-do
-    if patchelf --print-rpath $shlib \
-            | grep --extended-regexp "$MKLROOT|$PWD/usr/lib" > /dev/null
-    then
-        patchelf --set-rpath '$ORIGIN' $shlib
-    fi
-done
-
-for bin in $PREFIX/bin/julia*
-do
-    if patchelf --print-rpath $bin | grep $MKLROOT > /dev/null
-    then
-        rpath=$(patchelf --print-rpath $bin \
-            | sed --regexp-extended "s#^(.*):[^:]*${MKLROOT}[^:]*#\1#")
-        echo "RPATH of $bin is set to:"
-        echo "$rpath"
-        patchelf --set-rpath "$rpath" "$bin"
-    fi
-done
+"$RECIPE_DIR/fix_rpath.py" --prepend '$ORIGIN' $PREFIX/lib/julia/lib*
+"$RECIPE_DIR/fix_rpath.py" $PREFIX/bin/julia*
 
 cp -t $PREFIX/lib/julia \
    $MKLROOT/../compiler/lib/intel64/libiomp5.so \
