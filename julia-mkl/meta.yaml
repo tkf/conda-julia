@@ -8,6 +8,10 @@ source:
   md5: b61385671ba74767ab452363c43131fb
   # from https://s3.amazonaws.com/julialang/bin/checksums/julia-0.5.0.md5
 
+requirements:
+  build:
+    - patchelf
+
 build:
   string: mkl
   script_env:
