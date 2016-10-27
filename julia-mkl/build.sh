@@ -33,6 +33,18 @@ do
     fi
 done
 
+for bin in $PREFIX/bin/julia*
+do
+    if patchelf --print-rpath $bin | grep $MKLROOT > /dev/null
+    then
+        rpath=$(patchelf --print-rpath $bin \
+            | sed --regexp-extended "s#^(.*):[^:]*${MKLROOT}[^:]*#\1#")
+        echo "RPATH of $bin is set to:"
+        echo "$rpath"
+        patchelf --set-rpath "$rpath" "$bin"
+    fi
+done
+
 cp -t $PREFIX/lib/julia \
    $MKLROOT/../compiler/lib/intel64/libiomp5.so \
    $MKLROOT/lib/$INTEL_ARCH/lib*.so
