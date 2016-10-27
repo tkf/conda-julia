@@ -27,7 +27,8 @@ make install
 
 for shlib in $PREFIX/lib/julia/*.so
 do
-    if patchelf --print-rpath $shlib | grep $MKLROOT > /dev/null
+    if patchelf --print-rpath $shlib \
+            | grep --extended-regexp "$MKLROOT|$PWD/usr/lib" > /dev/null
     then
         patchelf --set-rpath '$ORIGIN' $shlib
     fi
