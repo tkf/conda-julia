@@ -18,6 +18,10 @@ build:
     - MKLROOT
     - LD_LIBRARY_PATH # [linux]
     - DYLD_LIBRARY_PATH # [osx]
+  ignore_prefix_files:
+    - lib/julia/libccalltest.so.debug
+      # Don't let conda-build try running patchelf on a static file
+      # See: https://github.com/conda/conda-build/issues/1411
 
 test:
   files:
