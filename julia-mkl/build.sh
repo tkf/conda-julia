@@ -25,6 +25,14 @@ echo "prefix=$PREFIX" >> Make.user
 make -j $MAKE_JOBS
 make install
 
+for shlib in $PREFIX/lib/julia/*.so
+do
+    if patchelf --print-rpath $shlib | grep $MKLROOT > /dev/null
+    then
+        patchelf --set-rpath '$ORIGIN' $shlib
+    fi
+done
+
 cp -t $PREFIX/lib/julia \
    $MKLROOT/../compiler/lib/intel64/libiomp5.so \
    $MKLROOT/lib/$INTEL_ARCH/lib*.so
