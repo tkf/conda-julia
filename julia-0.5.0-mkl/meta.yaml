@@ -10,7 +10,7 @@ source:
 
 requirements:
   build:
-    - python
+    - python 2.7*
     - gcc
     - patchelf
   run:
