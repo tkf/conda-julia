@@ -10,6 +10,8 @@ source:
 
 requirements:
   build:
+    - python
+    - gcc
     - patchelf
   run:
     - jl-mkl
@@ -20,8 +22,6 @@ build:
     - jl-mkl
   script_env:
     - MKLROOT
-    - LD_LIBRARY_PATH # [linux]
-    - DYLD_LIBRARY_PATH # [osx]
   binary_relocation: False
   ignore_prefix_files:
     - lib/julia/libccalltest.so.debug
