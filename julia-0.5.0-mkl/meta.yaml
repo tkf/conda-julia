@@ -11,6 +11,7 @@ source:
 requirements:
   build:
     - python 2.7*
+    - pkg-config
     - gcc
     - patchelf
   run:
