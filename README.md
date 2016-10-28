@@ -1,17 +1,6 @@
 # Conda recipes for JuliaLang and its packages
 
 
-## Quick usage
-
-If you want to install Julia and [Python interface to julia][pyjulia]
-in a conda environment named `try-julia`, you can just run:
-
-```sh
-conda config --add channels tkf
-conda create --name try-julia python-julia
-```
-
-
 ## Why conda?
 
 - Easily install official nightly build without destroying current
@@ -34,7 +23,15 @@ conda create --name try-julia python-julia
 
 - Julia binary distributions from [official download page].
   - `julia/`: nightly build
-  - `julia-0.3.11/`: stable release
+  - `julia-X.Y.Z/`: stable releases
+  - `julia-X.Y.Z-mkl/`: custom Julia build with Intel MKL
+  - `jl-mkl/`: "meta package" for choosing `julia-X.Y.Z-mkl`.
+    Installing this package instructs conda to use Julia build with MKL.
+
+The following packages work only with Julia <= 0.4.  Note that you can
+still install them in an isolated conda environment using Julia's
+package manger (e.g., `Pkg.add("PyCall")`).
+
 - Julia packages:
   - `julia-compat/`
   - `julia-dates/`
@@ -56,6 +53,16 @@ directory.  Running `make` at the root directory will build
 everything.  Note that Julia packages will be build against Julia
 0.4.x unless you set environment variable `JULIA_VERSION=0.3`.
 Running `make` will build packages for both versions.
+
+### Julia build with Intel MKL
+
+You need to build `jl-mkl` and `julia-X.Y.Z-mkl`:
+
+```sh
+conda build jl-mkl
+conda build julia-X.Y.Z-mkl
+conda install --use-local julia jl-mkl
+```
 
 
 ## Behind the scene
