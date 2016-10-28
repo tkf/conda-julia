@@ -15,8 +15,7 @@ requirements:
     - jl-mkl
 
 build:
-  string: mkl
-  number: 0
+  string: mkl_1
   features:
     - jl-mkl
   script_env:
