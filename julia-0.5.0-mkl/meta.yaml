@@ -11,10 +11,14 @@ source:
 requirements:
   build:
     - patchelf
+  run:
+    - jl-mkl
 
 build:
   string: mkl
   number: 0
+  features:
+    - jl-mkl
   script_env:
     - MKLROOT
     - LD_LIBRARY_PATH # [linux]

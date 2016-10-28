@@ -1,0 +1,11 @@
+package:
+  name: jl-mkl
+  version: 0.0.0
+
+build:
+  number: 0
+  track_features:
+    - jl-mkl
+
+about:
+  summary: A meta-package to track Julia MKL feature.
