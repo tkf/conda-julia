@@ -16,6 +16,7 @@ requirements:
     - patchelf
   run:
     - jl-mkl
+    - libgcc
 
 build:
   string: mkl_1
