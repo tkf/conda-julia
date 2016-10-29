@@ -20,9 +20,12 @@ fi
 
 source ${MKLROOT:-/opt/intel/mkl}/bin/mklvars.sh $INTEL_ARCH
 
-# Let LLVM builder know about glibcxx installed via conda:
-LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH
+if [ "$USE_CONDA_LIB" = 1 ]
+then
+    # Let LLVM builder know about glibcxx installed via conda:
+    LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+    export LD_LIBRARY_PATH
+fi
 
 cp --verbose "$RECIPE_DIR/Make.user" .
 echo "prefix=$PREFIX" >> Make.user

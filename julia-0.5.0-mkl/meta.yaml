@@ -24,6 +24,7 @@ build:
     - jl-mkl
   script_env:
     - MKLROOT
+    - USE_CONDA_LIB
   binary_relocation: False
   ignore_prefix_files:
     - lib/julia/libccalltest.so.debug
