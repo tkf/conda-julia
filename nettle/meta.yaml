@@ -1,0 +1,12 @@
+package:
+  name: nettle
+  version: 2.7.1
+
+source:
+  fn: nettle-2.7.1.tar.gz
+  url: https://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz
+  sha256: bc71ebd43435537d767799e414fce88e521b7278d48c860651216e1fc6555b40
+
+about:
+  home: https://www.lysator.liu.se/~nisse/nettle/
+  license_file: COPYING.LIB
