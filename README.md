@@ -28,12 +28,17 @@
   - `jl-mkl/`: "meta package" for choosing `julia-X.Y.Z-mkl`.
     Installing this package instructs conda to use Julia build with MKL.
 
-The following packages work only with Julia <= 0.4.  Note that you can
-still install them in an isolated conda environment using Julia's
-package manger (e.g., `Pkg.add("PyCall")`).
-
 - Julia packages:
   - `julia-compat/`
+  - `julia-nettle/`
+  - `nettle/`
+
+The following packages work only with Julia <= 0.4.  I'm leaving them
+for a demonstration purpose.  Note that you can still install those
+packages in an isolated conda environment using Julia's package manger
+(e.g., `Pkg.add("PyCall")`).
+
+- Julia packages (for Julia <= 0.4):
   - `julia-dates/`
   - `julia-pycall/`
 - [Python interface to julia][pyjulia]:
@@ -48,11 +53,9 @@ package manger (e.g., `Pkg.add("PyCall")`).
 ## How to build the packages
 
 Install `conda-build` and run `conda build .` at each recipe directory
-(e.g., `julia-0.3.11/`).  You can also just type `make` at each
-directory.  Running `make` at the root directory will build
-everything.  Note that Julia packages will be build against Julia
-0.4.x unless you set environment variable `JULIA_VERSION=0.3`.
-Running `make` will build packages for both versions.
+(e.g., `julia-0.5.0/`).  Note that Julia packages will be build
+against Julia 0.5.x unless you set environment variable as
+`JULIA_VERSION=0.4`.
 
 ### Julia build with Intel MKL
 
@@ -62,6 +65,28 @@ You need to build `jl-mkl` and `julia-X.Y.Z-mkl`:
 conda build jl-mkl
 conda build julia-X.Y.Z-mkl
 conda install --use-local julia jl-mkl
+```
+
+### Setting up IJulia
+
+Some Julia packages required for IJulia need external library.
+Official Anaconda repository already has ZMQ but it does not have
+nettle.  If you do not have root privileges it may be useful to use
+conda to install ZMQ and nettle.  Here is how to build Nettle.jl
+(julia-nettle) including its dependencies and then install everything
+else using `Pkg.add()`.
+
+```sh
+conda build nettle
+conda build julia-compat
+conda build julia-nettle
+conda install --use-local julia julia-nettle
+conda install zeromq
+```
+Then, in Julia REPL:
+```
+julia> Pkg.init()
+julia> Pkg.add("IJulia")
 ```
 
 
