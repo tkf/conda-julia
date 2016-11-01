@@ -1,0 +1,42 @@
+{% set version='0.2.4' %}
+{% set md5='953a5e39acff59907506ef5e5fba5c02' %}
+{% set build_number='0' %}
+
+{% if environ.get("JULIA_VERSION", "0.5") == "0.5" %}
+  {% set jl_range='>=0.5.0a0,<0.6a0' %}
+  {% set jl_prefix='jl05' %}
+{% else %}
+  {% set jl_range='>=0.4.0a0,<0.5a0' %}
+  {% set jl_prefix='jl04' %}
+{% endif %}
+
+package:
+  name: julia-nettle
+  version: {{ version }}
+  md5: {{ md5 }}
+
+source:
+  fn: julia-nettle-{{ version }}.zip
+  url: https://github.com/staticfloat/Nettle.jl/archive/v{{ version }}.zip
+
+requirements:
+  run:
+    - julia {{ jl_range }}
+    - julia-compat
+    - nettle 2.7.1
+
+build:
+  string: {{ jl_prefix + '_' + build_number }}
+  script_env:
+    - JULIA_VERSION
+
+test:
+  files:
+    - run_test.jl
+  commands:
+    - julia --version
+    - julia --check-bounds=yes run_test.jl
+
+about:
+  home: https://github.com/staticfloat/Nettle.jl
+  license_file: LICENSE.md
