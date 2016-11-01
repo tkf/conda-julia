@@ -1,19 +1,30 @@
+{% set version='0.4.13' %}
+{% set md5='d63df11f6af2d0c88eb69e6588f21e5e' %}
+{% set build_number='0' %}
+
+{% if environ.get("JULIA_VERSION", "0.5") == "0.5" %}
+  {% set jl_range='>=0.5.0a0,<0.6a0' %}
+  {% set jl_prefix='jl05' %}
+{% else %}
+  {% set jl_range='>=0.4.0a0,<0.5a0' %}
+  {% set jl_prefix='jl04' %}
+{% endif %}
+
 package:
   name: julia-compat
-  version: 0.4.6
+  version: {{ version }}
+  md5: {{ md5 }}
 
 source:
-  fn: julia-compat-0.4.6.zip
-  url: https://github.com/JuliaLang/Compat.jl/archive/v0.4.6.zip
+  fn: julia-compat-{{ version }}.zip
+  url: https://github.com/JuliaLang/Compat.jl/archive/v{{ version }}.zip
 
 requirements:
   run:
-    - julia >=0.3.0a0,<0.4a0 # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
-    - julia >=0.4.0a0,<0.5a0 # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+    - julia {{ jl_range }}
 
 build:
-  string: jl03_0      # [environ.get("JULIA_VERSION", "0.4") == "0.3"]
-  string: jl04_0      # [environ.get("JULIA_VERSION", "0.4") == "0.4"]
+  string: {{ jl_prefix + '_' + build_number }}
   script_env:
     - JULIA_VERSION
 
