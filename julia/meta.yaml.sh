@@ -1,5 +1,12 @@
+#!/bin/bash -e
+
+RECIPE_DIR="$PWD"
+cd ~/anaconda/conda-bld/julia_*/work/julia-*/
+
+cat <<EOF
 package:
   name: julia
+  version: "$(bin/julia "$RECIPE_DIR/pep386.jl")"
 
 source:
   fn: julia-linux64.tar.gz                                # [linux64]
@@ -23,3 +30,4 @@ test:
 about:
   home: http://julialang.org
   license_file: LICENSE.md
+EOF
