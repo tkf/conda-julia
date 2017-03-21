@@ -15,9 +15,7 @@ source:
   url: https://status.julialang.org/download/linux-i686   # [linux32]
 
 build:
-  rpaths:
-    - lib/julia
-    - lib
+  binary_relocation: False
 
 test:
   files:
